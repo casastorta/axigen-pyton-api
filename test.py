@@ -10,8 +10,8 @@ def main():
     '''
     General axigen connection test
     '''
-    from axigen import axigenapi as ax
-    conn = ax.axigenapi('127.0.0.1')
+    from axigenapi import api as ax
+    conn = ax.api('127.0.0.1')
     conn.connect()
     pprint.pprint(conn.get_version())
     del(conn)
@@ -31,7 +31,7 @@ def main():
     Axigen succesful login test
     '''
     from nimium import axigenapi as ax
-    conn = ax.axigenapi('10.252.18.8', timeout=3.0)
+    conn = ax.axigenapi('127.0.0.1', timeout=3.0)
     username = sys.argv[1]
     password = sys.argv[2]
     if (conn.connect()):
@@ -81,8 +81,8 @@ def main():
         (conn.set_max_accounts('nimiumdomain1.com', 15))
     print "Create accounts: %s" % \
        (conn.create_accounts('nimiumdomain1.com', [\
-            {'user': 'ofac', 'password':'blabla'},\
-            {'user': 'mofac', 'password':'blabla'},\
+            {'user': 'ofac', 'password': 'blabla'},\
+            {'user': 'mofac', 'password': 'blabla'},\
             {'user': 'pofac', 'password': 'pppp'},\
         ]))
     print "Number of accounts for nimiumdomain1.com: %s" % \

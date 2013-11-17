@@ -4,7 +4,7 @@
 Telnet module
 '''
 
-from axigen import connection as nsock
+from axigenapi import connection as nsock
 
 
 class client(nsock.connection):
