@@ -1,6 +1,6 @@
 #!/usr/bin/env
 
-from axigen import axigenapi
+from axigenapi import api
 from axigen.connection import ConnectionError as CErr, SocketError as SErr
 
 
@@ -18,7 +18,7 @@ class checks(object):
         '''
         status = None
         try:
-            conn = axigenapi.axigenapi(hostname, port)
+            conn = api.api(hostname, port)
             self.__axigen = conn
         except (SErr, CErr), message:
             self.__errors['axigen'] = str(message)

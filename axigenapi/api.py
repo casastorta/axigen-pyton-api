@@ -4,12 +4,10 @@
 Axigen API module
 '''
 
-from axigen import telnet as ntel
-### DEBUG
-#import time
+from axigenapi import telnet as ntel
 
 
-class axigenapi(ntel.client):
+class api(ntel.client):
     '''
     Axigen CLI API class
     '''
@@ -42,12 +40,12 @@ class axigenapi(ntel.client):
         hostname = str(hostname).strip()
         port = int(port)
         timeout = float(timeout)
-        super(axigenapi, self).__init__(hostname, port, timeout, 0)
+        super(api, self).__init__(hostname, port, timeout, 0)
 
     def __del__(self):
         if (self._connected):
             self._send_command('EXIT')
-        super(axigenapi, self).__del__()
+        super(api, self).__del__()
 
     def connect(self):
         '''
@@ -349,14 +347,9 @@ class axigenapi(ntel.client):
                 if (status):
                     poststatus = self._send_command("DONE")
                     if (poststatus):
-                        if (create_admin):
-                            commitstatus = self.commit()
-                            if (commitstatus):
-                                return(True)
-                        else:
-                            commitstatus = self._send_command("DONE")
-                            if (commitstatus):
-                                return(True)
+                        commitstatus = self._send_command("DONE")
+                        if (commitstatus):
+                            return(True)
         return(False)
 
     def create_account(self, domain='', username='', password='#63f7&4ss_'):
@@ -677,7 +670,7 @@ class axigenapi(ntel.client):
             :return: bool
         '''
         max_accounts = int(max_accounts)
-        if (max_accounts <= 0):
+        if (max_accounts < 0):
             return(False)
         context_status = self.context_domain_adminlimits(domain)
         if (context_status):
@@ -982,13 +975,9 @@ class axigenapi(ntel.client):
         '''
         if (self._connected is False):
             self.connect()
-        ### DEBUG
-        #print ">>> [%s] %s" % (time.time(), command)
-        returnvalue = super(axigenapi, self)._send_command(
+        returnvalue = super(api, self)._send_command(
             command, '\r\n', shot_receive
         )
-        ### DEBUG
-        #print "<<< [%s] %s" % (time.time(), returnvalue)
         self._last_received = returnvalue
         if (auto_validate):
             validate_status = self._validate_axigen_return(returnvalue)
