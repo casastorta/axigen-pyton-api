@@ -9,4 +9,5 @@ setup(name='axigen-api',
     author_email='dev@krivokuca.net',
     url='https://github.com/casastorta/axigen-pyton-api',
     packages=['axigenapi'],
+    license='LGPL',
 )
