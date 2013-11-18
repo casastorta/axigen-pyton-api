@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 
+"""
+Demo script for Axigen-API module.
+
+Commandline input parameters to the script are admin username
+and password.
+"""
+
 import os
 import sys
 
